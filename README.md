@@ -1,14 +1,7 @@
-Hi there 👋
 
 
-I'm Murat from Turkey. I develope .Net applications and ORACLE SIMHONY & 3700 extensions about 7 years and I add to tutorials my youtube channel sometimes.
-In these days, I am learning mobile application development.
-
-
-
-### Hi there 👋, Murat Bölükbaşı
-#### Software Developer
-![Software Developer](https://pbs.twimg.com/profile_banners/183595639/1686307794/600x200)
+Hi there 👋, Murat Bölükbaşı
+Software Developer
 
 I'm Murat from Turkey. I develope .Net applications and ORACLE SIMHONY & 3700 extensions about 7 years and I add to tutorials my youtube channel sometimes. In these days, I am learning mobile application development.
 
