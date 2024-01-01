@@ -5,8 +5,6 @@ I'm Murat from Turkey. I develope .Net applications and ORACLE SIMHONY & 3700 ex
 In these days, I am learning mobile application development.
 
 
-![Murat's GitHub stats](https://github-readme-stats.vercel.app/api?username=mbolukbasi86&theme=dark&show_icons=true)
-
 
 ### Hi there 👋, Murat Bölükbaşı
 #### Software Developer
