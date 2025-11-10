@@ -7,7 +7,7 @@ I working on .Net applications and ORACLE SIMHONY & 3700 hospitality systems abo
 
 Skills: .NET Core & MVC Applications & WPF & T-Sql & ORACLE SIMPHONY & MICROS 3700
 
-- 🔭 I’m currently working at ATP DIGITAL 
-- 🌱 I’m currently learning IOS Development 
+- 🔭 I’m currently working at PROTEL
+
 
 
