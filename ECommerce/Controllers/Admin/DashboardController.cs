@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ECommerceAdmin.Data;
+using ECommerce.Data;
 
-namespace ECommerceAdmin.Controllers.Admin
+namespace ECommerce.Controllers.Admin
 {
     [Route("admin")]
     public class DashboardController : Controller

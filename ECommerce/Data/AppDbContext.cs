@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ECommerceAdmin.Models;
+using ECommerce.Models;
 
-namespace ECommerceAdmin.Data
+namespace ECommerce.Data
 {
     public class AppDbContext : DbContext
     {

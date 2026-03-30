@@ -27,7 +27,7 @@ An ASP.NET Core MVC admin panel for eCommerce management.
 
 ### Run Locally
 ```bash
-cd ECommerceAdmin
+cd ECommerce
 dotnet run
 # Navigate to http://localhost:5000/admin
 ```

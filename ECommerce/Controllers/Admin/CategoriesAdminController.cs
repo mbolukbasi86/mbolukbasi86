@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ECommerceAdmin.Data;
-using ECommerceAdmin.Models;
+using ECommerce.Data;
+using ECommerce.Models;
 
-namespace ECommerceAdmin.Controllers.Admin
+namespace ECommerce.Controllers.Admin
 {
     [Route("admin/kategoriler")]
     public class CategoriesAdminController : Controller

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ECommerceAdmin.Data;
-using ECommerceAdmin.Models;
+using ECommerce.Data;
+using ECommerce.Models;
 
-namespace ECommerceAdmin.Controllers.Admin
+namespace ECommerce.Controllers.Admin
 {
     [Route("admin/urunler")]
     public class ProductsAdminController : Controller
