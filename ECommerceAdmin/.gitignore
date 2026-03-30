@@ -1,0 +1,22 @@
+## .NET Core build outputs
+bin/
+obj/
+
+## SQLite database files (generated at runtime)
+*.db
+*.db-shm
+*.db-wal
+
+## Visual Studio / Rider user settings
+.vs/
+.idea/
+*.user
+*.suo
+
+## NuGet
+*.nupkg
+project.lock.json
+
+## OS
+.DS_Store
+Thumbs.db

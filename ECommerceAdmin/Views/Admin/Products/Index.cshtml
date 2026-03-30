@@ -1,0 +1,134 @@
+@model IEnumerable<ECommerceAdmin.Models.Product>
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-1">Ürünler</h4>
+        <p class="text-muted mb-0">@Model.Count() ürün listeleniyor.</p>
+    </div>
+    <a href="/admin/urunler/ekle" class="btn btn-primary d-flex align-items-center gap-2">
+        <i class="bi bi-plus-circle"></i> Yeni Ürün
+    </a>
+</div>
+
+<!-- Filters -->
+<div class="card border-0 rounded-3 mb-4" style="box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+    <div class="card-body p-3">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold text-muted">Ürün Ara</label>
+                <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control form-control-sm"
+                       placeholder="Ürün adı veya açıklama..." />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold text-muted">Kategori</label>
+                <select name="categoryFilter" class="form-select form-select-sm">
+                    <option value="">Tüm Kategoriler</option>
+                    @foreach (var item in (IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)ViewBag.Categories)
+                    {
+                        <option value="@item.Value" selected="@(item.Value == ViewBag.CategoryFilter?.ToString())">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold text-muted">Durum</label>
+                <select name="activeFilter" class="form-select form-select-sm">
+                    <option value="">Tümü</option>
+                    <option value="true" selected="@(ViewBag.ActiveFilter == true)">Aktif</option>
+                    <option value="false" selected="@(ViewBag.ActiveFilter == false)">Pasif</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-sm flex-fill">
+                    <i class="bi bi-search me-1"></i>Filtrele
+                </button>
+                <a href="/admin/urunler" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="admin-table">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ürün Adı</th>
+                    <th>Kategori</th>
+                    <th>Fiyat</th>
+                    <th>Stok</th>
+                    <th>Durum</th>
+                    <th>Güncellenme</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="8" class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                            Ürün bulunamadı.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td class="text-muted small">@product.Id</td>
+                            <td>
+                                <div class="fw-semibold">@product.Name</div>
+                                @if (!string.IsNullOrEmpty(product.Description))
+                                {
+                                    <div class="text-muted small text-truncate" style="max-width:220px">@product.Description</div>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@product.Category?.Name</span>
+                            </td>
+                            <td class="fw-semibold text-primary">@product.Price.ToString("N2") ₺</td>
+                            <td>
+                                <span class="badge @(product.StockQuantity < 10 ? "badge-stock-low" : "badge-stock-ok")">
+                                    @product.StockQuantity adet
+                                </span>
+                            </td>
+                            <td>
+                                @if (product.IsActive)
+                                {
+                                    <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary"><i class="bi bi-x-circle me-1"></i>Pasif</span>
+                                }
+                            </td>
+                            <td class="text-muted small">@product.UpdatedAt.ToString("dd.MM.yyyy")</td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a href="/admin/urunler/duzenle/@product.Id" class="btn btn-sm btn-outline-primary" title="Düzenle">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="/admin/urunler/sil/@product.Id" method="post" style="display:inline"
+                                          onsubmit="return confirm('@product.Name ürününü silmek istediğinize emin misiniz?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Sil">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
