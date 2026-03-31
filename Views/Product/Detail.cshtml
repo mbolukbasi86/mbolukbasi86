@@ -26,13 +26,26 @@
         <!-- Product Image Column -->
         <div class="col-md-6">
             <div class="card border-0 shadow-sm">
-                <!-- KEY FIX: Product detail image uses DisplayImagePath with onerror fallback -->
+                <!-- Product detail image served from Photos table BLOB -->
+                @{
+                    var firstPhoto = Model.Photos.FirstOrDefault();
+                }
                 <div class="product-img-wrapper" style="height: 400px;">
-                    <img src="@Model.DisplayImagePath"
-                         alt="@Model.Name"
-                         class="img-fluid rounded"
-                         onerror="this.src='/images/products/no-image.png'"
-                         style="max-height: 400px; object-fit: contain;" />
+                    @if (firstPhoto != null)
+                    {
+                        <img src="/Photo/GetImage/@firstPhoto.Id"
+                             alt="@Model.Name"
+                             class="img-fluid rounded"
+                             onerror="this.onerror=null;this.src='/images/products/no-image.png'"
+                             style="max-height: 400px; object-fit: contain;" />
+                    }
+                    else
+                    {
+                        <img src="/images/products/no-image.png"
+                             alt="@Model.Name"
+                             class="img-fluid rounded"
+                             style="max-height: 400px; object-fit: contain;" />
+                    }
                 </div>
             </div>
         </div>
@@ -99,9 +112,9 @@
                         <div class="card h-100 product-card border-0 shadow-sm">
                             <a asp-controller="Product" asp-action="Detail" asp-route-id="@related.Id">
                                 <div class="product-img-wrapper" style="height: 160px;">
-                                    <img src="@related.DisplayImagePath"
+                                    <img src="/Photo/GetImageByProduct/@related.Id"
                                          alt="@related.Name"
-                                         onerror="this.src='/images/products/no-image.png'" />
+                                         onerror="this.onerror=null;this.src='/images/products/no-image.png'" />
                                 </div>
                             </a>
                             <div class="card-body p-2">

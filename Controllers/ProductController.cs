@@ -42,7 +42,9 @@ namespace BootStrapECommerce.Controllers
         // GET: /Product/Detail/5
         public async Task<IActionResult> Detail(int id)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && p.IsActive);
+            var product = await _context.Products
+                .Include(p => p.Photos)
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive);
             if (product == null)
             {
                 return NotFound();

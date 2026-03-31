@@ -21,10 +21,6 @@ namespace BootStrapECommerce.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal? OldPrice { get; set; }
 
-        // Image path stored relative to wwwroot (e.g. /images/products/product1.jpg)
-        [StringLength(500)]
-        public string? ImagePath { get; set; }
-
         [StringLength(100)]
         public string? Category { get; set; }
 
@@ -34,9 +30,7 @@ namespace BootStrapECommerce.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [NotMapped]
-        public string DisplayImagePath => string.IsNullOrEmpty(ImagePath)
-            ? "/images/products/no-image.png"
-            : ImagePath;
+        // Navigation: one product can have multiple photos stored as BLOB in Photos table
+        public ICollection<Photo> Photos { get; set; } = new List<Photo>();
     }
 }
