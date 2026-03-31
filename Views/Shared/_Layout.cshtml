@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BootStrap E-Ticaret</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BootStrapECommerce.styles.css" asp-append-version="true" />
+    <style>
+        .navbar-brand { font-weight: bold; font-size: 1.5rem; color: #e44d26 !important; }
+        .product-card { transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        /* KEY FIX: Ensure product images fill the card and are displayed correctly */
+        .product-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .price-old { text-decoration: line-through; color: #999; font-size: 0.9rem; }
+        .price-new { color: #e44d26; font-size: 1.2rem; font-weight: bold; }
+        .badge-discount { background-color: #e44d26; }
+        .hero-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 0; }
+        footer { background-color: #343a40; color: #adb5bd; padding: 30px 0; margin-top: 40px; }
+        footer a { color: #adb5bd; }
+        footer a:hover { color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">🛒 BootStrap E-Ticaret</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                        aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarMain">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Ürünler</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" asp-controller="Product" asp-action="Index" method="get">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Ürün ara..." aria-label="Search" />
+                        <button class="btn btn-outline-light" type="submit">Ara</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 - BootStrap E-Ticaret</p>
+            <p class="mb-0"><small>ASP.NET Core MVC | Entity Framework Core | SQL Server</small></p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

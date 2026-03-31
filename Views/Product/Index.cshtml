@@ -1,0 +1,101 @@
+@model IEnumerable<BootStrapECommerce.Models.Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+    var categories = ViewBag.Categories as List<string> ?? new List<string>();
+    var selectedCategory = ViewBag.SelectedCategory as string;
+    var search = ViewBag.Search as string;
+}
+
+<div class="container py-4">
+    <div class="row">
+        <!-- Sidebar: Category Filter -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-dark text-white fw-bold">Kategoriler</div>
+                <div class="list-group list-group-flush">
+                    <a asp-controller="Product" asp-action="Index"
+                       class="list-group-item list-group-item-action @(string.IsNullOrEmpty(selectedCategory) ? "active" : "")">
+                        Tüm Kategoriler
+                    </a>
+                    @foreach (var cat in categories)
+                    {
+                        <a asp-controller="Product" asp-action="Index" asp-route-category="@cat"
+                           class="list-group-item list-group-item-action @(selectedCategory == cat ? "active" : "")">
+                            @cat
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="fw-bold mb-0">
+                    @if (!string.IsNullOrEmpty(search))
+                    {
+                        <span>"@search" için sonuçlar</span>
+                    }
+                    else if (!string.IsNullOrEmpty(selectedCategory))
+                    {
+                        <span>@selectedCategory</span>
+                    }
+                    else
+                    {
+                        <span>Tüm Ürünler</span>
+                    }
+                </h4>
+                <span class="text-muted">@Model.Count() ürün bulundu</span>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i> Arama kriterlerinize uygun ürün bulunamadı.
+                </div>
+            }
+            else
+            {
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+                    @foreach (var product in Model)
+                    {
+                        <div class="col">
+                            <div class="card h-100 product-card border-0 shadow-sm">
+                                <!-- Product Image Fix: use DisplayImagePath with onerror fallback -->
+                                <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                                    <div class="product-img-wrapper">
+                                        <img src="@product.DisplayImagePath"
+                                             alt="@product.Name"
+                                             onerror="this.src='/images/products/no-image.png'" />
+                                    </div>
+                                </a>
+                                <div class="card-body d-flex flex-column">
+                                    <span class="badge bg-secondary mb-2 align-self-start">@product.Category</span>
+                                    <h6 class="card-title">
+                                        <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id"
+                                           class="text-decoration-none text-dark">@product.Name</a>
+                                    </h6>
+                                    <p class="card-text text-muted small flex-grow-1">
+                                        @(product.Description?.Length > 70 ? product.Description.Substring(0, 70) + "..." : product.Description)
+                                    </p>
+                                    <div class="mt-2">
+                                        @if (product.OldPrice.HasValue)
+                                        {
+                                            <span class="price-old me-2">@product.OldPrice.Value.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                        }
+                                        <span class="price-new">@product.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-0 pb-3">
+                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id"
+                                       class="btn btn-dark w-100 btn-sm">Ürünü İncele</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

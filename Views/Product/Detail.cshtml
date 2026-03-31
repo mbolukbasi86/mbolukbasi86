@@ -1,0 +1,124 @@
+@model BootStrapECommerce.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+    var relatedProducts = ViewBag.RelatedProducts as List<BootStrapECommerce.Models.Product> ?? new List<BootStrapECommerce.Models.Product>();
+}
+
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Ürünler</a></li>
+            @if (!string.IsNullOrEmpty(Model.Category))
+            {
+                <li class="breadcrumb-item">
+                    <a asp-controller="Product" asp-action="Index" asp-route-category="@Model.Category">@Model.Category</a>
+                </li>
+            }
+            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <!-- Product Detail -->
+    <div class="row g-5 mb-5">
+        <!-- Product Image Column -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <!-- KEY FIX: Product detail image uses DisplayImagePath with onerror fallback -->
+                <div class="product-img-wrapper" style="height: 400px;">
+                    <img src="@Model.DisplayImagePath"
+                         alt="@Model.Name"
+                         class="img-fluid rounded"
+                         onerror="this.src='/images/products/no-image.png'"
+                         style="max-height: 400px; object-fit: contain;" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info Column -->
+        <div class="col-md-6">
+            <span class="badge bg-secondary mb-2">@Model.Category</span>
+            <h2 class="fw-bold mb-3">@Model.Name</h2>
+
+            <!-- Price -->
+            <div class="mb-4">
+                @if (Model.OldPrice.HasValue)
+                {
+                    <span class="price-old me-3 fs-5">@Model.OldPrice.Value.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                    var discount = (int)((Model.OldPrice.Value - Model.Price) / Model.OldPrice.Value * 100);
+                    <span class="badge badge-discount text-white me-2">%@discount İndirim</span>
+                }
+                <div class="price-new fs-2">@Model.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-muted mb-4">@Model.Description</p>
+
+            <!-- Stock Status -->
+            <div class="mb-4">
+                @if (Model.Stock > 10)
+                {
+                    <span class="badge bg-success fs-6">✓ Stokta Var (@Model.Stock adet)</span>
+                }
+                else if (Model.Stock > 0)
+                {
+                    <span class="badge bg-warning text-dark fs-6">⚠ Son @Model.Stock adet</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger fs-6">✗ Stokta Yok</span>
+                }
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2">
+                @if (Model.Stock > 0)
+                {
+                    <button class="btn btn-dark btn-lg">🛒 Sepete Ekle</button>
+                    <button class="btn btn-outline-dark">♡ Favorilere Ekle</button>
+                }
+                else
+                {
+                    <button class="btn btn-secondary btn-lg" disabled>Stokta Yok</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (relatedProducts.Any())
+    {
+        <div class="mb-5">
+            <h4 class="fw-bold mb-4 border-bottom pb-2">İlgili Ürünler</h4>
+            <div class="row row-cols-2 row-cols-md-4 g-3">
+                @foreach (var related in relatedProducts)
+                {
+                    <div class="col">
+                        <div class="card h-100 product-card border-0 shadow-sm">
+                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@related.Id">
+                                <div class="product-img-wrapper" style="height: 160px;">
+                                    <img src="@related.DisplayImagePath"
+                                         alt="@related.Name"
+                                         onerror="this.src='/images/products/no-image.png'" />
+                                </div>
+                            </a>
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1 small">
+                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@related.Id"
+                                       class="text-decoration-none text-dark">@related.Name</a>
+                                </h6>
+                                <span class="price-new small">@related.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="text-center">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-dark">← Ürünlere Geri Dön</a>
+    </div>
+</div>
