@@ -1,7 +1,3 @@
-Hi there 👋,
-
-I'm Murat from Turkey. 
-I working on .Net applications and ORACLE SIMHONY & 3700 hospitality systems about 10 years and I add to tutorials my youtube channel sometimes.
 
 <p align="center">
   <a href="https://www.linkedin.com/in/murat-bolukbasi-a2580a53/" target="_blank">
@@ -20,6 +16,14 @@ I working on .Net applications and ORACLE SIMHONY & 3700 hospitality systems abo
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>
 </p>
+
+Hi there 👋,
+
+
+
+I'm Murat from Turkey. 
+I working on .Net applications and ORACLE SIMHONY & 3700 hospitality systems about 10 years and I add to tutorials my youtube channel sometimes.
+
 
 Skills: .NET Core & MVC Applications & WPF & T-Sql & ORACLE SIMPHONY & MICROS 3700
 
