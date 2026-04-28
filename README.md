@@ -30,4 +30,15 @@ Skills: .NET Core & MVC Applications & WPF & T-Sql & ORACLE SIMPHONY & MICROS 37
 - 🔭 I'm currently working at PROTEL
 
 
+---
 
+## 📊 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=mbolukbasi86&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true" alt="GitHub Stats" height="180"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=mbolukbasi86&theme=tokyonight" alt="GitHub Streak" height="180"/>
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mbolukbasi86&layout=compact&theme=tokyonight" alt="Top Languages" height="150"/>
+</p>
