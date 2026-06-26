@@ -25,7 +25,7 @@ I'm Murat from Turkey.
 I working on .Net applications and ORACLE SIMPHONY & 3700 hospitality systems about 10 years and I add to tutorials my youtube channel sometimes.
 
 
-Skills: .NET Core & MVC Applications & WPF & T-Sql & MOBILE DEVELOPMENT & ORACLE SIMPHONY Extension & MICROS 3700
+Skills: .NET Core & MVC Applications & WPF & T-Sql & Mobile Development & ORACLE SIMPHONY Extension & MICROS 3700
 
 
 ---
